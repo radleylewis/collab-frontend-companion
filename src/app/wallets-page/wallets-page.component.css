@@ -1,0 +1,11 @@
+.walletsPage {
+  display: flex;
+  flex-direction: column;
+}
+
+.topBar {
+  display: flex;
+  flex-direction: row;  
+  border-bottom: 2px solid black;
+  justify-content: space-between;
+}
