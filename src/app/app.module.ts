@@ -4,15 +4,14 @@ import { FormsModule } from "@angular/forms";
 import { StoreModule } from '@ngrx/store';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { WalletsPageComponent } from "./wallets-page/wallets-page.component";
+import { VotingPageComponent } from "./voting-page/voting-page.component";
+import { LoginComponent } from "./login/login.component";
+import { AppReducer } from "./app.reducer";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { WalletsPageComponent } from './wallets-page/wallets-page.component';
-import { VotingPageComponent } from './voting-page/voting-page.component';
-import { LoginComponent } from './login/login.component';
-import { AppReducer } from './app.reducer';
-
-import { GetWalletsService } from './get-wallets.service';
+import { GetWalletsService } from "./get-wallets.service";
 
 @NgModule({
   declarations: [
@@ -28,9 +27,7 @@ import { GetWalletsService } from './get-wallets.service';
     HttpClientModule,
     StoreModule.forRoot({ app: AppReducer })
   ],
-  providers: [
-    GetWalletsService
-  ],
+  providers: [GetWalletsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
