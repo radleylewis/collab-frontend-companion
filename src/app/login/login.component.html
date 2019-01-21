@@ -1,0 +1,18 @@
+<div>
+  <form>
+    <label for="username">
+      Username:<br>
+      <input type="text" [(ngModel)]="user.username" name="username" />
+    </label>
+    <br>
+    <label for="password">
+      Password:<br>
+      <input type="password" [(ngModel)]="user.password" name="password" />
+    </label>
+    <br>
+    <input type="submit" value="Login" />
+  </form>
+
+  <h1>{{ user.username }}</h1>
+  <h2>{{ user.password }}</h2>
+</div>
