@@ -15,7 +15,7 @@ export class WalletsPageComponent implements OnInit {
   wallets:string = '';
 
   ngOnInit() {
-    console.log(this.GetWalletsService.wallets);
+    console.log('getting wallets', this.GetWalletsService.wallets);
     this.wallets = this.GetWalletsService.MyData();
   }
 
