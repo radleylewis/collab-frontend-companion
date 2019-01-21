@@ -9,14 +9,13 @@ import { GetWalletsService } from '../get-wallets.service';
 
 export class WalletsPageComponent implements OnInit {
 
+  walletData:any;
+
   constructor(private GetWalletsService: GetWalletsService) { 
   }
 
-  wallets:string = '';
-
   ngOnInit() {
-    console.log('getting wallets', this.GetWalletsService.wallets);
-    this.wallets = this.GetWalletsService.MyData();
+    this.walletData = this.GetWalletsService.getWallets();    
   }
 
 }

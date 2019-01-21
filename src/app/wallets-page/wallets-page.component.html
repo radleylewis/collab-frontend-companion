@@ -2,7 +2,14 @@
   <div class="topBar">
     <button class="logOutBtn" onClick=""></button>
   </div>
-  <div class="walletsList">
-    <p>{{ wallets }}</p>
+  <div class="walletsList" *ngFor="let wallet of walletData.wallets">
+    <p>This is a wallet</p>
+    <p>{{ wallet.alias }}</p>
+    <p>{{ wallet.publicKey }}</p>
+    <p>{{ wallet.createdAt }}</p>
+    <p>{{ wallet.balance }}</p>
+    <p>{{ wallet.users }}</p>
+    <p>{{ wallet.transactions }}</p>
+    <p>{{ wallet.operations }}</p>
   </div>
 </div>
