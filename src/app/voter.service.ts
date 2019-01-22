@@ -1,24 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Store } from "@ngrx/store";
 
 @Injectable({
   providedIn: 'root'
 })
+export class VoterService {
 
-export class GetWalletsService {
-  
   baseURL:string = 'http://127.0.0.1:3030';
-  voteOpsToRender:any = [];
+  pendingOperations:any;
 
   constructor(private http: HttpClient) {
   }
 
-  getWallets(jwt:any) {
+  vote(body:any) {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + jwt
+      'Authorization': 'Bearer ' + data.jwt
     });
-    return this.http.get(this.baseURL + '/wallet', { headers: headers });
+    return this.http.post(this.baseURL + '/vote', { headers: headers, body: body });
+  }
+
+
+  votePageDeets(data:any) {
+    this.pendingOperations = data;
+    console.log(this.pendingOperations);
   }
 }

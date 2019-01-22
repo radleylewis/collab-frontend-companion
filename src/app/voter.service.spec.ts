@@ -1,15 +1,19 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Store } from "@ngrx/store";
+import { TestBed } from '@angular/core/testing';
 
-@Injectable({
-  providedIn: 'root'
-})
+import { VoterService } from './voter.service';
+
+describe('VoterService', () => {
+  beforeEach(() => TestBed.configureTestingModule({}));
+
+  it('should be created', () => {
+    const service: VoterService = TestBed.get(VoterService);
+    expect(service).toBeTruthy();
+  });
+});
 
 export class GetWalletsService {
   
   baseURL:string = 'http://127.0.0.1:3030';
-  voteOpsToRender:any = [];
 
   constructor(private http: HttpClient) {
   }

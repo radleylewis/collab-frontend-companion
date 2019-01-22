@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { GetWalletsService } from "../get-wallets.service";
-import { Router, ActivatedRoute } from "@angular/router";
+import { Router, ActivatedRoute } from '@angular/router';
+import { VoterService } from "../voter.service";
 
 @Component({
   selector: "app-wallets-page",
@@ -13,20 +14,21 @@ export class WalletsPageComponent implements OnInit {
   walletData: any;
 
   constructor(
-    private route: ActivatedRoute,
-    private gws: GetWalletsService,
+    private route:ActivatedRoute, 
+    private gws: GetWalletsService, 
+    private vs: VoterService, 
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.gws.getWallets(this.jwt).subscribe(data => {
-      console.log(data);
-      this.walletData = data;
+    this.gws.getWallets(this.jwt)    
+    .subscribe(data => { 
+      this.walletData = data; 
     });
   }
 
-  voter(data: any) {
-    this.gws.votePageDeets(data);
-    this.router.navigate(["/vote"]);
+  voter(data:any) {
+    this.vs.votePageDeets(data);
+    this.router.navigate(['/vote']);
   }
 }
