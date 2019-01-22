@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Store } from "@ngrx/store";
 
 @Injectable({
   providedIn: 'root'
@@ -8,18 +8,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export class GetWalletsService {
   
-  wallets:any;
+  baseURL:string = 'http://127.0.0.1:3030';
+  voteOpsToRender:any = [];
   
-  constructor(private route:ActivatedRoute, private http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
-  getWallets() {
+  getWallets(jwt:any) {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhhbnMiLCJpYXQiOjE1NDgwODk4NTksImV4cCI6MTU0ODE3NjI1OX0.dryydcwrZf2V1TNN14mPtXtJ8zgTeGMw0TwBUyGDCic'
+      'Authorization': 'Bearer ' + jwt
     });
-    let options = { headers: headers };
-    this.http.get('http://127.0.0.1:3030/wallet', options)
-      .subscribe((res) => { this.wallets = res; });
+    return this.http.get(this.baseURL + '/wallet', { headers: headers });
   }
+
+  votePageDeets(data:any) {
+    }
 }
