@@ -15,7 +15,6 @@ export class WalletsPageComponent implements OnInit {
 
   constructor(private route:ActivatedRoute, private gws: GetWalletsService, private router: Router) {}
 
-  
   ngOnInit() {
     this.gws.getWallets(this.jwt)    
     .subscribe(data => { 
@@ -25,7 +24,7 @@ export class WalletsPageComponent implements OnInit {
   }
 
   voter(data:any) {
-    console.log('taking user to vote on wallet', data);
+    this.gws.votePageDeets(data);
     this.router.navigate(['/vote']);
   }
 }
