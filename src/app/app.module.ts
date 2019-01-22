@@ -2,6 +2,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { StoreModule } from "@ngrx/store";
+import { HttpClientModule } from "@angular/common/http";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -11,6 +13,7 @@ import { LoginComponent } from "./login/login.component";
 import { AppReducer } from "./app.reducer";
 
 import { GetWalletsService } from "./get-wallets.service";
+import {LoginService} from './login-service.service';
 
 @NgModule({
   declarations: [
@@ -21,11 +24,16 @@ import { GetWalletsService } from "./get-wallets.service";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
-    FormsModule,
-    StoreModule.forRoot({ app: AppReducer })
+    FormsModule, 
+    HttpClientModule,
+    StoreModule.forRoot({ app: AppReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 10
+    })
   ],
-  providers: [GetWalletsService],
+  providers: [GetWalletsService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

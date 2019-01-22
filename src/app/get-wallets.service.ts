@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Store } from "@ngrx/store";
 
 @Injectable({
   providedIn: 'root'
@@ -7,17 +8,20 @@ import { Injectable } from '@angular/core';
 
 export class GetWalletsService {
   
-  constructor() {
-    // private http: HttpClient
+  baseURL:string = 'http://127.0.0.1:3030';
+  voteOpsToRender:any = [];
+  
+  constructor(private http: HttpClient) {
   }
 
-  wallets = [
-    'Wallet001', 'Wallet002'
-  ];
-
-  MyData() {
-    return 'this is the data'
-    // let obs = this.http.get('http://127.0.0.1:3030/wallet');
-    // obs.subscribe((response) => console.log('got the response: ', response));    
+  getWallets(jwt:any) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + jwt
+    });
+    return this.http.get(this.baseURL + '/wallet', { headers: headers });
   }
+
+  votePageDeets(data:any) {
+    }
 }
