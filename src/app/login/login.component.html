@@ -12,8 +12,7 @@
     <br>
     <button (click)="click(user.username, user.password)">Login</button>
   </form>
-
-  <h1>{{ user.username }}</h1>
-  <h2>{{ user.password }}</h2>
   <h3>{{ user.jwt }}</h3>
+
+  <h3 *ngIf="errorMessage.length > 0">{{ errorMessage }}</h3>
 </div>
