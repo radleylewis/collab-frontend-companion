@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { StoreModule } from "@ngrx/store";
 import { HttpClientModule } from "@angular/common/http";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -27,7 +28,10 @@ import {LoginService} from './login-service.service';
     AppRoutingModule,
     FormsModule, 
     HttpClientModule,
-    StoreModule.forRoot({ app: AppReducer })
+    StoreModule.forRoot({ app: AppReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 10
+    })
   ],
   providers: [GetWalletsService, LoginService],
   bootstrap: [AppComponent]
