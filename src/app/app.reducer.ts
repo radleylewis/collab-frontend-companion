@@ -1,28 +1,19 @@
-import { ActionTypes, Login } from "./app.actions";
+import { Action } from '@ngrx/store';
+import { ActionTypes } from './app.actions';
 
-export interface State {
-  username: string;
-  jwt: string;
-  wallets: object[];
-}
-
-export const initialState: State = {
-  username: "",
-  jwt: "",
-  wallets: []
-};
-
-export function AppReducer(state = initialState, action: Login) {
+export const initialState = 0;
+ 
+export function AppReducer(state = initialState, action: Action) {
   switch (action.type) {
-    case ActionTypes.Login:
-      console.log("username, ", action.payload.username);
-      console.log("jwt, ", action.payload.jwt);
-      return {
-        ...state,
-        username: action.payload.username,
-        jwt: action.payload.jwt
-      };
-
+    // case ActionTypes.Increment:
+    //   return state + 1;
+ 
+    // case ActionTypes.Decrement:
+    //   return state - 1;
+ 
+    // case ActionTypes.Reset:
+    //   return 0;
+ 
     default:
       return state;
   }
