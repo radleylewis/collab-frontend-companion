@@ -2,9 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { GetWalletsService } from "../get-wallets.service";
 import { Router, ActivatedRoute } from "@angular/router";
 import { Store, select } from "@ngrx/store";
-import {State} from '../app.reducer';
+import { State } from "../app.reducer";
 import { VoterService } from "../voter.service";
-
 
 @Component({
   selector: "app-wallets-page",
@@ -12,11 +11,11 @@ import { VoterService } from "../voter.service";
   styleUrls: ["./wallets-page.component.css"]
 })
 export class WalletsPageComponent implements OnInit {
-
-  jwt: String =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhhbnMiLCJpYXQiOjE1NDgwODk4NTksImV4cCI6MTU0ODE3NjI1OX0.dryydcwrZf2V1TNN14mPtXtJ8zgTeGMw0TwBUyGDCic";
-  // jwt: String = "";
-  walletData: any;
+  jwt: string;
+  walletHolder: any;
+  pendingOpsList: Object[];
+  opHolder: any;
+  private sub: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,22 +24,50 @@ export class WalletsPageComponent implements OnInit {
     private router: Router,
     private store: Store<State>
   ) {
-    store.select('app/jwt').subscribe(jwt => console.log('this is jwt', jwt));
+    store.select("app/jwt").subscribe(jwt => console.log("this is jwt", jwt));
   }
 
   ngOnInit() {
-    this.gws.getWallets(this.jwt).subscribe(data => {
-      this.walletData = data;
+    this.sub = this.route.params.subscribe(params => {
+      this.jwt = params["jwt"];
+      this.gws.getWallets(this.jwt).subscribe(walletsData => {
+        this.walletHolder = walletsData;
+        this.vs.pendingOpsAll(this.jwt).subscribe(pendOps => {
+          this.opHolder = pendOps;
+          this.pendingOpsList = this.opHolder.operations.map(operation => {
+            if (operation.votingState === 0) {
+              return operation.publicKey;
+            }
+          });
+          for (let wallet of this.walletHolder.wallets) {
+            this.pendingOpsList.indexOf(wallet.publickey) > -1
+              ? (wallet["pendingOps"] = true)
+              : (wallet.pendingOps = false);
+          }
+        });
+      });
     });
-
-    // this.jwt = (store: Store<State>): State => {
-    //   let state: State;
-    //   store.
-    // }
   }
 
-  voter(data: any) {
-    this.vs.votePageDeets(data);
-    this.router.navigate(["/vote"]);
+  renderPendingOps(publicKey: String) {
+    for (let wallet of this.walletHolder.wallets) {
+      if (wallet.publickey === publicKey) {
+        this.vs.pendingOpsSpecific(this.jwt, publicKey).subscribe(data => {
+          wallet["opDetails"] = data;
+          wallet["voteRender"] = true;
+          console.log(wallet);
+        });
+      }
+    }
+  }
+
+  vote(publicKey: string, opID: number, valueOfVote: any) {
+    console.log(publicKey);
+    const body = {
+      publicKey: publicKey,
+      valueOfVote: valueOfVote,
+      operation_id: opID
+    };
+    this.vs.vote(this.jwt, body).subscribe(data => console.log(data));
   }
 }

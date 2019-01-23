@@ -1,28 +1,40 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class VoterService {
+  baseURL: String = "http://127.0.0.1:3030";
+  pendingOperations: any;
 
-  baseURL: String = 'http://127.0.0.1:3030';
-  pendingOperations:any;
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
-  }
-
-  vote(body:any) {
+  vote(jwt: any, body: any) {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + body.jwt
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + jwt
     });
-    return this.http.post(this.baseURL + '/vote', { headers: headers, body: body });
+    return this.http.post(this.baseURL + "/vote", body, { headers: headers });
   }
 
+  pendingOpsSpecific(jwt: any, walletID: any) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + jwt
+    });
+    return this.http.get(this.baseURL + "/operations/pending/" + walletID, {
+      headers: headers
+    });
+  }
 
-  votePageDeets(data:any) {
-    this.pendingOperations = data;
-    console.log(this.pendingOperations);
+  pendingOpsAll(jwt: any) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + jwt
+    });
+    return this.http.get(this.baseURL + "/operations/pending/", {
+      headers: headers
+    });
   }
 }

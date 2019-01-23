@@ -7,8 +7,8 @@ import { VotingPageComponent } from './voting-page/voting-page.component';
 const routes: Routes = [
   { path: '', redirectTo:'login', pathMatch:'full' },
   { path: "login", component: LoginComponent },
-  { path: 'wallets', component: WalletsPageComponent },
-  { path: 'vote', component: VotingPageComponent },
+  { path: 'wallets/:jwt', component: WalletsPageComponent },
+  { path: 'vote/:publicKey', component: VotingPageComponent },
 ];
 
 @NgModule({

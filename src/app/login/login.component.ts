@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       result => {
         this.user = result;
         this.dispatchUserData(result.username, result.jwt);
-        this.router.navigate((['/wallets']));
+        this.router.navigate((['/wallets', result.jwt])); // passing jwt in header for now
       },
       error => {
         console.log("This is the post error ", error);

@@ -1,34 +1,46 @@
 <div class="walletsPage">
   <div class="topBar">
-    <button class="logOutBtn" onClick=""></button>
+    <button class="logOutBtn" href="">Log Out</button>
   </div>
-  <div *ngFor="let wallet of walletData?.wallets">
+  <div *ngFor="let wallet of walletHolder?.wallets">
     <div class="walletsCard">
         <div class="walletDeets">
           <p>Wallet Name: {{ wallet?.alias }}</p>
           <p>Public Key: {{ wallet?.publickey }}</p>
           <p>Registered: {{ wallet?.createdAt }}</p>
-          <p>Current Balance: BTC {{ wallet?.balance }}</p>
-          <p>Members: </p><p *ngFor="let user of wallet?.users">{{ user.username }}</p>
-          <ng-template *ngIf="wallet?.transactions.length > 0; then showTxn; else notShowTxn">
-          </ng-template>
+          <p>Current Balance: BTC{{ wallet?.balance }}.00</p>
+          <div class="memberList"><p>Members: </p><p *ngFor="let user of wallet?.users">{{ user.username }}</p></div>
+          <ng-template *ngIf="wallet?.transactions.length >= 0; then showTxn; else notShowTxn"></ng-template>
           <ng-template #showTxn>
             <p>Transactions:</p>
-            <p *ngFor="let txn of wallet.transactions">
-              {{ txn }}
-            </p>
+            <div *ngFor="let txn of wallet.transactions">
+              <p>{{ txn.date }}</p>
+            </div>
           </ng-template>
           <ng-template #notShowTxn>
-              <p>No transactions yet</p>
+              <p>No transactions have been made on this wallet yet</p>
           </ng-template>
-          <ng-template *ngIf="wallet?.operations.length > 0; then showOps; else notShowOps">
+          <ng-template *ngIf="wallet?.pendingOps === true && wallet?.voteRender === true; then showDecision; else notShowDecision"></ng-template>
+            <ng-template #showDecision>
+              <div *ngFor="let decision of wallet.opDetails.operations">
+                <div class="decisionBox">
+                  <a href=""><img src="../../assets/delete-button.svg" width="3%" height="3%" alt="exit" class="closeTxn"></a>
+                  <p class="target">Sending to: {{ decision.target }}</p>
+                  <p>Transaction type: {{ decision.type }}</p>
+                  <p>Amount: BTC{{ decision.amount }}.00</p>
+                  <p>Txn Message: {{ decision.message }}</p>
+                  <div class="voteContainer">
+                    <button class="vote1" (click)="vote(decision.publicKey, decision.operation_id, 1)">Accept</button>
+                    <button class="vote2" (click)="vote(decision.publicKey, decision.operation_id, 2)">Decline</button>
+                  </div>
+                </div>
+              </div>
             </ng-template>
-            <ng-template #showOps>
-              <a class="goToVoteBtn" (click)="voter(wallet.operations)">Outstanding approve/decline request on this wallet</a>
-            </ng-template>
-            <ng-template #notShowOps>
-              <p>No transactions pending approval</p>
-            </ng-template>
+            <ng-template #notShowDecision>
+              <ng-template *ngIf="wallet?.pendingOps === true; then showButton; else notShowButton"></ng-template>
+                <ng-template #showButton><a class="goToVoteBtn" (click)="renderPendingOps(wallet.publickey)">Decisions Pending Approval >></a></ng-template>
+                <ng-template #notShowButton><p>No transactions pending approval</p></ng-template>
+            </ng-template> 
         </div>
     </div>    
   </div>
