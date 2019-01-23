@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: "root"
 })
 export class VoterService {
-  baseURL: String = "http://192.168.1.145:3030";
+  baseURL: String = environment.apiURL;
   pendingOperations: any;
 
   constructor(private http: HttpClient) {}

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: "root"
@@ -11,7 +12,7 @@ export class LoginService {
   loginUser(username: string, password: string): Observable<any> {
     const base64 = btoa(`${username}:${password}`);
     const auth = `Basic ${base64}`;
-    const uri = "http://192.168.1.145:3030/login";
+    const uri = environment.apiURL + "/login";
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/x-www-form-urlencoded",

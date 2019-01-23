@@ -8,7 +8,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { WalletsPageComponent } from "./wallets-page/wallets-page.component";
-import { VotingPageComponent } from "./voting-page/voting-page.component";
 import { LoginComponent } from "./login/login.component";
 import { AppReducer } from "./app.reducer";
 
@@ -21,7 +20,6 @@ import { environment } from '../environments/environment';
   declarations: [
     AppComponent,
     WalletsPageComponent,
-    VotingPageComponent,
     LoginComponent
   ],
   imports: [

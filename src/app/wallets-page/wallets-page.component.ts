@@ -26,7 +26,7 @@ export class WalletsPageComponent implements OnInit {
     private router: Router,
     private store: Store<State>
   ) {
-    store.select("app/jwt").subscribe(jwt => console.log("this is jwt", jwt));
+    store.select("app/jwt").subscribe(jwt => console.log(""));
   }
 
   ngOnInit() {
@@ -49,7 +49,6 @@ export class WalletsPageComponent implements OnInit {
               : (wallet.pendingOps = false);
           }
           this.loaded = true;
-          console.log(this.pendingOpsList);
         });
       });
     });
@@ -57,12 +56,15 @@ export class WalletsPageComponent implements OnInit {
 
 
   renderPendingOps(publicKey: String) {
+    console.log('this is the specific wallet button ', this.jwt);
+    console.log('this is the publicKey', publicKey);
+    
+    
     for (let wallet of this.walletHolder.wallets) {
       if (wallet.publickey === publicKey) {
 
         this.vs.pendingOpsSpecific(this.jwt, publicKey)    
         .subscribe(data => {
-          console.log(data);
           wallet['opDetails'] = data;
           wallet['voteRender'] = true;
         })
@@ -70,7 +72,6 @@ export class WalletsPageComponent implements OnInit {
       }
     }
   }
-
   
   vote(publicKey:string, opID:number, valueOfVote:any) {
     this.voted = true;
@@ -83,13 +84,14 @@ export class WalletsPageComponent implements OnInit {
     .subscribe(() => {
       this.renderWalletStanding()
     });
-
+  }
+  
   logOut() {
     this.jwt = '';
     this.walletHolder = [];
     this.pendingOpsList = [];
     this.opHolder = [];
     this.router.navigate((['/login']));
+    this.voted = false;
   }
-
-};
+}

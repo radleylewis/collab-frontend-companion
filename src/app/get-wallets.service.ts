@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Store } from "@ngrx/store";
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Store } from "@ngrx/store";
 
 export class GetWalletsService {
   
-  baseURL:string = 'http://192.168.1.145:3030';
+  baseURL:string = environment.apiURL;
   voteOpsToRender:any = [];
 
   constructor(private http: HttpClient) {

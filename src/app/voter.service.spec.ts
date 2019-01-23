@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-
+import { environment } from '../environments/environment';
 import { VoterService } from './voter.service';
 
 describe('VoterService', () => {
@@ -13,7 +13,7 @@ describe('VoterService', () => {
 
 export class GetWalletsService {
   
-  baseURL:string = 'http://192.168.1.145:3030';
+  baseURL:string = environment.apiURL;
 
   constructor(private http: HttpClient) {
   }
