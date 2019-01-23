@@ -12,12 +12,6 @@ import { LoginService } from "../login-service.service";
 })
 
 export class LoginComponent implements OnInit {
-  constructor(
-    private store: Store<State>,
-    private service: LoginService,
-    private router: Router
-  ) {}
-
   user = {
     username: "",
     password: "",
@@ -25,6 +19,11 @@ export class LoginComponent implements OnInit {
   };
 
   errorMessage: String = "";
+  constructor(
+    private store: Store<State>,
+    private service: LoginService,
+    private router: Router
+  ) {}
 
   click(username: string, password: string) {
     this.service.loginUser(username, password).subscribe(

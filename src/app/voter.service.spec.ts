@@ -13,7 +13,7 @@ describe('VoterService', () => {
 
 export class GetWalletsService {
   
-  baseURL:string = 'http://127.0.0.1:3030';
+  baseURL:string = 'http://192.168.1.145:3030';
 
   constructor(private http: HttpClient) {
   }
