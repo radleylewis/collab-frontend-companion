@@ -11,7 +11,7 @@ export class LoginService {
   loginUser(username: string, password: string): Observable<any> {
     const base64 = btoa(`${username}:${password}`);
     const auth = `Basic ${base64}`;
-    const uri = "http://localhost:3030/login";
+    const uri = "http://192.168.1.145:3030/login";
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/x-www-form-urlencoded",

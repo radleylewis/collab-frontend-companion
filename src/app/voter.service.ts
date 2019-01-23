@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
   providedIn: "root"
 })
 export class VoterService {
-  baseURL: String = "http://127.0.0.1:3030";
+  baseURL: String = "http://192.168.1.145:3030";
   pendingOperations: any;
 
   constructor(private http: HttpClient) {}
