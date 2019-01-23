@@ -28,5 +28,3 @@ export class VotingPageComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 }
-
-

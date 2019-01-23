@@ -14,6 +14,8 @@ export class WalletsPageComponent implements OnInit {
   walletHolder: any;
   pendingOpsList: Object[];
   opHolder: any;
+  loaded: any;
+  voted: any;
   private sub: any;
 
   constructor(
@@ -36,14 +38,14 @@ export class WalletsPageComponent implements OnInit {
         this.vs.pendingOpsAll(this.jwt)
           .subscribe(pendOps => { 
           this.opHolder = pendOps;
-          this.pendingOpsList = this.opHolder.operations.map((operation) => { 
-            if (operation.votingState === 0) {
-              return operation.publicKey 
-            }
-          });            
+          this.pendingOpsList = this.opHolder.operations.filter(operation => {
+            if (operation.votingState === 0) return operation.publicKey;
+          }).map(operation => operation.publicKey);            
           for (let wallet of this.walletHolder.wallets) {
             this.pendingOpsList.indexOf(wallet.publickey) > -1 ? wallet['pendingOps'] = true : wallet.pendingOps = false;
           }
+          this.loaded = true;
+          console.log(this.pendingOpsList);
         });
       });
     });
@@ -55,6 +57,7 @@ export class WalletsPageComponent implements OnInit {
       if (wallet.publickey === publicKey) {
         this.vs.pendingOpsSpecific(this.jwt, publicKey)    
         .subscribe(data => {
+          console.log(data);
           wallet['opDetails'] = data;
           wallet['voteRender'] = true;
         })
@@ -63,6 +66,7 @@ export class WalletsPageComponent implements OnInit {
   }
   
   vote(publicKey:string, opID:number, valueOfVote:any) {
+    this.voted = true;
     const body = {
       publicKey: publicKey,
       valueOfVote: valueOfVote,
@@ -72,6 +76,14 @@ export class WalletsPageComponent implements OnInit {
     .subscribe(() => {
       this.renderWalletStanding()
     });
+  }
+
+  logOut() {
+    this.jwt = '';
+    this.walletHolder = [];
+    this.pendingOpsList = [];
+    this.opHolder = [];
+    this.router.navigate((['/login']));
   }
 
 };
