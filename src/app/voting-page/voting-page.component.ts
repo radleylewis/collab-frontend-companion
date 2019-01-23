@@ -10,9 +10,9 @@ import { VoterService } from "../voter.service";
 })
 export class VotingPageComponent implements OnInit {
 
-  operationID:any;
-  publicKey:any;
-  vote:any;
+  // operationID:any;
+  // publicKey:any;
+  // vote:any;
 
   constructor(private route:ActivatedRoute, private vs: VoterService) { }
 
@@ -24,7 +24,7 @@ export class VotingPageComponent implements OnInit {
       operation_id: operationID,
       publicKey: publicKey,
       valueOfVote: vote,
-    }
+    };
     this.vs.vote(body)    
     .subscribe(data => { console.log(data);});
   }

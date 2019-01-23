@@ -6,16 +6,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class VoterService {
 
-  baseURL:string = 'http://127.0.0.1:3030';
+  baseURL: String = 'http://127.0.0.1:3030';
   pendingOperations:any;
 
   constructor(private http: HttpClient) {
   }
 
   vote(body:any) {
-    let headers = new HttpHeaders({
+    const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + data.jwt
+      'Authorization': 'Bearer ' + body.jwt
     });
     return this.http.post(this.baseURL + '/vote', { headers: headers, body: body });
   }
