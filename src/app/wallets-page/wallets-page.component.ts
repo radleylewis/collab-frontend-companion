@@ -24,6 +24,10 @@ export class WalletsPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.renderWalletStanding();
+  };
+
+  renderWalletStanding() {
     this.sub = this.route.params.subscribe(params => {
       this.jwt = params['jwt']
       this.gws.getWallets(this.jwt)    
@@ -43,7 +47,8 @@ export class WalletsPageComponent implements OnInit {
         });
       });
     });
-  };
+  }
+
 
   renderPendingOps(publicKey:String) {  
     for (let wallet of this.walletHolder.wallets) {
@@ -52,21 +57,21 @@ export class WalletsPageComponent implements OnInit {
         .subscribe(data => {
           wallet['opDetails'] = data;
           wallet['voteRender'] = true;
-          console.log(wallet);
-        });
+        })
       }
     };    
   }
   
   vote(publicKey:string, opID:number, valueOfVote:any) {
-    console.log(publicKey);
     const body = {
       publicKey: publicKey,
       valueOfVote: valueOfVote,
       operation_id: opID,
     }
     this.vs.vote(this.jwt, body)
-    .subscribe(data => console.log(data));
+    .subscribe(() => {
+      this.renderWalletStanding()
+    });
   }
 
 };

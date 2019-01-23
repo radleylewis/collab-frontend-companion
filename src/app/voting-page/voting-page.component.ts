@@ -30,35 +30,3 @@ export class VotingPageComponent implements OnInit, OnDestroy {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// operationID:any;
-// publicKey:any;
-// vote:any;
-// vote(operationID, publicKey, vote) {
-//   const body = {
-//     operation_id: operationID,
-//     publicKey: publicKey,
-//     valueOfVote: vote,
-//   }
-//   this.vs.vote(body)    
-//   .subscribe(data => { console.log(data);});
-// }

@@ -4,11 +4,13 @@ import { Router } from "@angular/router";
 import { Login } from "../app.actions";
 import { State } from "../app.reducer";
 import { LoginService } from "../login-service.service";
+
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
   styleUrls: ["./login.component.css"]
 })
+
 export class LoginComponent implements OnInit {
   constructor(
     private store: Store<State>,
