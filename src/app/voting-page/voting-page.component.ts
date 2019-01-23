@@ -10,6 +10,7 @@ import { VoterService } from "../voter.service";
 })
 export class VotingPageComponent implements OnInit, OnDestroy {
 
+
   jwt: String = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhhbnMiLCJpYXQiOjE1NDgxNzY0NDIsImV4cCI6MTU0ODI2Mjg0Mn0.IybLwo5hnK5iwOpFdfIFZXlQehGw_CXfn0ziVRCHHME";
   publicKey: String;
   private sub: any;
@@ -28,3 +29,9 @@ export class VotingPageComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 32545692e5e0226abb2e46f710e111ac5308b997

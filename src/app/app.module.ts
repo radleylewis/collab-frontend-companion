@@ -14,6 +14,8 @@ import { AppReducer } from "./app.reducer";
 
 import { GetWalletsService } from "./get-wallets.service";
 import {LoginService} from './login-service.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {LoginService} from './login-service.service';
     StoreModule.forRoot({ app: AppReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 10
-    })
+    }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [GetWalletsService, LoginService],
   bootstrap: [AppComponent]
