@@ -1,4 +1,8 @@
-<div>
+<img class="logo" src="../../assets/users-group.png" alt="">
+<video class="tronVideo" playsinline autoplay volume="0" loop>
+      <source src="../../assets/White+Mountains+TRON+Timelapse.mp4" type="video/mp4">
+</video>
+<div class="loginContainer">
   <form>
     <label for="username">
       Username:<br>
@@ -10,7 +14,7 @@
       <input type="password" [(ngModel)]="user.password" name="password" />
     </label>
     <br>
-    <button (click)="click(user.username, user.password)">Login</button>
+    <button class="loginBtn" (click)="click(user.username, user.password)">Login</button>
   </form>
 
   <h3 *ngIf="errorMessage.length > 0">{{ errorMessage }}</h3>

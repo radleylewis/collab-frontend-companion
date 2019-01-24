@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Inconsolata);
 
 html { background-color: black; 
-color: white;}
+;}
 
 .walletsPage {
     display: flex;
@@ -18,13 +18,16 @@ color: white;}
 }
 
 .walletsCard {
+    background: none;
+    transition: box-shadow 0.03s ease-in-out;
+    box-shadow: 0 0 12px 0px #0c75d7;
+    border: 1px solid #22AFCA; 
+    margin-top: 10%;
+    margin-left: 2%;
+    margin-right: 2%;
+
     color: white;
-    border: 1px solid #22AFCA;
-    border-radius: 5px;
-    transition: width 350ms ease-in-out 0s;
-    box-shadow: 0 0 19px 1px #0c75d7;
-    margin: 5%;
-    font-family: Inconsolata;
+    background: black;
 }
 
 .walletDeets {
@@ -34,23 +37,27 @@ color: white;}
 }
 
 .goToVoteBtn {
-    border: 1px solid #ff5700;
-    border-radius: 5px;
-    transition: width 350ms ease-in-out 0s;
-    padding: 1%;
-    margin-bottom: 3%;
-    outline: none !important;
+    background: none;
+    transition: box-shadow 0.03s ease-in-out;
+    box-shadow: 0 0 12px 0px #0c75d7;
+    border: 1px solid #22AFCA; 
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 5%;
+    padding-left: 10px;
+    padding-right: 10px;
+ 
 }
 
 .goToVoteBtn:active {
-    background-color: #ff5700;
+    background-color: #0c75d7;
     color: black;
 }
 
 .goToVoteBtn:hover  {
-    border: 1px solid #ff5700;
+    border: 1px solid #0c75d7;
     transition: width 350ms ease-in-out 0s;
-    box-shadow: 0 0 19px 1px #ff5700;
+    box-shadow: 0 0 19px 1px #0c75d7;
     cursor: pointer;
 }
 
@@ -68,14 +75,16 @@ color: white;}
 }
 
 .decisionBox {
+    background: none;
+    transition: box-shadow 0.03s ease-in-out;
+    box-shadow: 0 0 12px 0px #0c75d7;
+    border: 1px solid #22AFCA; 
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 1.5%;
+
     color: white;
-    border: 1px solid #22AFCA;
-    border-radius: 5px;
-    transition: width 350ms ease-in-out 0s;
-    box-shadow: 0 0 19px 1px #0c75d7;
-    margin: 2.5%;
-    font-family: Inconsolata;
-    text-align: center;
+    background: black;
 }
 
 .vote1 {
@@ -132,4 +141,80 @@ img {
 .memberList {
     display: block;
     text-align: center
+}
+
+.loginContainer {
+    left: 50%;
+    top: 60%;
+    position: absolute;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    -moz-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+    font-family: Inconsolata;
+}
+
+.loginBtn {
+	margin: 16px auto;
+	padding: 10px 20px 10px 20px;
+    color: white !important;
+    font-weight: bold;
+	overflow: hidden;
+    position: relative;
+    float: right;
+	background: none;
+	box-shadow: 0 0 0 0 #22AFCA;
+    border: 1px solid #22AFCA;
+    background:  #22AFCA;
+}
+.loginBtn::after {
+    background: white none repeat scroll 0 0;
+    content: "";
+    height: 155px;
+    left: -75px;
+    opacity: 0.2;
+    position: absolute;
+    top: -50px;
+    transform: rotate(35deg);
+    transition: all 850ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
+    width: 50px;
+    z-index: 10000000000000000000000;
+   }
+
+   .logo {
+    z-index: 10000000000000000000000;
+    left: 50%;
+    top: 20%;
+    position: absolute;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+    -moz-transform: translate3d(-50%, -50%, 0);
+    transform: translate3d(-50%, -50%, 0);
+    font-family: Inconsolata;
+   }
+   .loginBtn {
+       transition: all 0s ease-in-out 0s;
+       box-shadow: 0 0 5px 0 white;
+  
+   }
+   .loginBtn:hover::after {
+    left: 120%;
+    background: white;
+    transition: all 850ms cubic-bezier(0.19, 1, 0.22, 1) 0s;
+   }
+input {
+    background: none;
+    transition: box-shadow 0.03s ease-in-out;
+    box-shadow: 0 0 12px 0px #0c75d7;
+    border: 1px solid #22AFCA; 
+    margin-bottom: 3%;
+    margin-top: 1%;
+    color: black;
+    background: white;
+}
+
+.tronVideo {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    min-width: 100%;
+    min-height: 100%;
 }
